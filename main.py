@@ -1,47 +1,70 @@
-from cmath import log
-import word
+from wordClass import Word
+from dateClass import Date
+from l33tClass import L33t
 import datetime
 from itertools import permutations
+from datetime import datetime
+import random
 
 def main():
+    wordClass = Word()
+    dateClass = Date()
     WORD_ARRAY = ['Elisa', 'Jason','mystere']
-    WORD_ARRAY = detectType(WORD_ARRAY)
+    dateClean = dateClass.cleanDate(datetime.now().strftime("%Y-%m-%d"))
+    print(dateClean)
+    for date in dateClean:
+        WORD_ARRAY.append(date)
+
+        
+    month = dateClass.transformMonth(dateClean[1])
     result = []
+    for el in month:
+        # WORD_ARRAY.append(month[random.randint(0, month.__len__()-1)])
+        WORD_ARRAY.append(el)
+    
+        print(WORD_ARRAY)
+        WORD_ARRAY = detectType(WORD_ARRAY)
 
-    workArray = []
+        workArray = []
 
-    for word in WORD_ARRAY:
-        workArray.append(word)
 
-        newWorkArray = []
-        for word in workArray:
-            newWorkArray.append(lowercase(word))
+        for word in WORD_ARRAY:
+            workArray.append(word)
+            if workArray.__len__() > 5:
+                workArray.pop(random.randint(0, 3))
+            
+            newWorkArray = []
+            for word in workArray:
+                newWorkArray.append(wordClass.lowercase(word))
 
-        result = result + randomWord(newWorkArray)
+            result = result + randomWord(newWorkArray)
 
-        newWorkArray = []
-        for word in workArray:
-            newWorkArray.append(uppercase(word))
+            newWorkArray = []
+            for word in workArray:
+                newWorkArray.append(wordClass.uppercase(word))
 
-        result = result + randomWord(newWorkArray)
+            result = result + randomWord(newWorkArray)
 
-        newWorkArray = []
-        for word in workArray:
-            newWorkArray.append(capitalize(word))
+            newWorkArray = []
+            for word in workArray:
+                newWorkArray.append(wordClass.capitalize(word))
 
-        result = result + randomWord(newWorkArray)
+            result = result + randomWord(newWorkArray)
+            
+        WORD_ARRAY.remove(el)
 
-    print(result)
+    print(result.__len__())
 
 # commun
 def detectType(WORD_ARRAY):
+    dateClass = Date()
+    
     newWORD_ARRAY = []
     for word in WORD_ARRAY:
         if isinstance(word, str):
             print ('string')
         elif isinstance(word, datetime.date):
-            word = cleanDate(word)
-            print(word)
+            word = dateClass.cleanDate(word)
         newWORD_ARRAY.append(word)
         
         
@@ -49,17 +72,8 @@ def detectType(WORD_ARRAY):
     return newWORD_ARRAY
 
 # Word
-def capitalize(word):
-    return word.capitalize()
-
-def uppercase(word):
-    return word.upper()
-
-def lowercase(word):
-    return word.lower()
 
 def randomWord (array):
-    print('[randomWord]')
     result = []
     for y in permutations(array):
         result.append(convertTuple(y))
@@ -73,31 +87,5 @@ def convertTuple(tup):
 
     return str
 
-
-
-# Date
-def cleanDate(date):
-    print('[cleanDate]')
-    date= str(date)
-    dateArray = date.split('-')
-    print(dateArray)
-    delemiter = ''
-    return delemiter.join(dateArray)
-
-
-month= {
-    "01": [1,'01', 'janvier', 'janv'],
-    "02": [2,'02', 'février', 'fevr'],
-    "03": [3,'03', 'mars', 'mars'],
-    "04": [4,'04', 'avril', 'avr'],
-    "05": [5,'05', 'mai', 'mai'],
-    "06": [6,'06', 'juin', 'juin'],
-    "07": [7,'07', 'juillet', 'juill'],
-    "08": [8,'08', 'aout', 'aout'],
-    "09": [9,'09', 'septembre', 'sept'],
-    "10": [10,'10', 'octobre', 'oct'],
-    "11": [11,'11', 'novembre', 'nov'],
-    "12": [12,'12', 'decembre', 'dec'],
-}
 
 main()
