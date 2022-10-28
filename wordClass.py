@@ -1,11 +1,11 @@
 class Word:
-    def capitalize(word):
+    def capitalize(self, word):
         return word.capitalize()
 
-    def uppercase(word):
+    def uppercase(self, word):
         return word.upper()
 
-    def lowercase(word):
+    def lowercase(self, word):
         return word.lower()
 
     
