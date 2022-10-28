@@ -1,4 +1,5 @@
 class Date:
+    # gestion des jours en 01 - 1
     month = {
             "01": [1, 'janvier', 'janv'],
             "02": [2, 'février', 'fevr'],

@@ -7,8 +7,11 @@ from datetime import datetime
 import random
 
 def main():
+    # Bien faire attention au lower upper capitalize pour le leet
+    # idée: envoyer au leet la liste qu'on génère à la fin
     wordClass = Word()
     dateClass = Date()
+    leetClass = L33t()
     WORD_ARRAY = ['Elisa', 'Jason','mystere']
     dateClean = dateClass.cleanDate(datetime.now().strftime("%Y-%m-%d"))
     print(dateClean)
@@ -19,7 +22,6 @@ def main():
     month = dateClass.transformMonth(dateClean[1])
     result = []
     for el in month:
-        # WORD_ARRAY.append(month[random.randint(0, month.__len__()-1)])
         WORD_ARRAY.append(el)
     
         print(WORD_ARRAY)
@@ -53,6 +55,7 @@ def main():
             
         WORD_ARRAY.remove(el)
 
+    leetClass.transformWord('Elisa')
     print(result.__len__())
 
 # commun
