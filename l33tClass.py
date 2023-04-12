@@ -13,17 +13,18 @@ class L33t:
     }
     
     def transformWord(self, word):
+        leetArray = []
         word= word.lower()
         print(word)
-        for i in enumerate(word, start=0):
-            for index, letter in  enumerate(word, start=0):
-                # print(index, letter)
-                index = index + i
-                for leetLetter in self.leet:
-                    print(leetLetter, letter)
-                    if (leetLetter == letter):
-                        print('yes')
-                        word = word[:index] + str(self.leet[leetLetter]) + word[index+1:]
-                        print(word)
-                        break
-            print(word)
+        for index, letter in  enumerate(word, start=0):
+            print(letter)
+            for leetLetter in self.leet:
+                print(leetLetter, letter)
+                if (leetLetter == letter):
+                    print('yes')
+                    word = word[:index] + str(self.leet[leetLetter]) + word[index+1:]
+                    print(word)
+                    leetArray.append(word)
+                    break
+        print(leetArray) 
+        return leetArray

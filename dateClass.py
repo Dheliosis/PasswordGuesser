@@ -16,7 +16,7 @@ class Date:
         }
     
     def cleanDate(self, date):
-        # print('[cleanDate]')
+        print('[cleanDate]')
         date= str(date)
         dateArray = date.split('-')
         # print(dateArray)
@@ -25,6 +25,6 @@ class Date:
     def transformMonth(self, date):
         for el in self.month:
             if date == el:
-                print(el)
-                print(self.month[el])
+                # print(el)
+                # print(self.month[el])
                 return self.month[el]

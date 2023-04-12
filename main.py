@@ -7,67 +7,88 @@ from datetime import datetime
 import random
 
 def main():
+    # print(form)
     # Bien faire attention au lower upper capitalize pour le leet
     # idée: envoyer au leet la liste qu'on génère à la fin
     wordClass = Word()
     dateClass = Date()
     leetClass = L33t()
-    WORD_ARRAY = ['Elisa', 'Jason','mystere']
-    dateClean = dateClass.cleanDate(datetime.now().strftime("%Y-%m-%d"))
-    print(dateClean)
-    for date in dateClean:
-        WORD_ARRAY.append(date)
+
+    WORD_ARRAY = ['Elisa', 'Jason','mystere', '2023-04-06']
+    newWORD_ARRAY = WORD_ARRAY.copy()
+
+    for counter,mot in enumerate(WORD_ARRAY):
+        print(mot)
+        if not "-" in mot and not isinstance(mot, tuple):
+            print("ins", mot)
+            leet = leetClass.transformWord(mot)
+            for counter, el in enumerate(leet):
+                newWORD_ARRAY.append(el)
+
+        elif "-" in mot:
+            dateClean = dateClass.cleanDate(mot)
+            print(dateClean)
+            for date in dateClean:
+                newWORD_ARRAY.append(date)
+            month = dateClass.transformMonth(dateClean[1])
+            print(month)
+            for el in month:
+                newWORD_ARRAY.append(str(el))
+        else:
+            print("Ne doit pas se produire", mot)
+       
+    
+    print(WORD_ARRAY)
+    print(newWORD_ARRAY)
 
         
-    month = dateClass.transformMonth(dateClean[1])
     result = []
-    for el in month:
-        WORD_ARRAY.append(el)
-    
-        print(WORD_ARRAY)
-        WORD_ARRAY = detectType(WORD_ARRAY)
 
-        workArray = []
+    workArray = []
 
 
-        for word in WORD_ARRAY:
-            workArray.append(word)
-            if workArray.__len__() > 5:
-                workArray.pop(random.randint(0, 3))
-            
-            newWorkArray = []
-            for word in workArray:
-                newWorkArray.append(wordClass.lowercase(word))
+    for word in newWORD_ARRAY:
+        workArray.append(word)
+        if workArray.__len__() > 5:
+            workArray.pop(random.randint(0, 3))
+        
+        newWorkArray = []
+        for word in workArray:
+            newWorkArray.append(wordClass.lowercase(word))
 
-            result = result + randomWord(newWorkArray)
+        result = result + randomWord(newWorkArray)
 
-            newWorkArray = []
-            for word in workArray:
-                newWorkArray.append(wordClass.uppercase(word))
+        newWorkArray = []
+        for word in workArray:
+            newWorkArray.append(wordClass.uppercase(word))
 
-            result = result + randomWord(newWorkArray)
+        result = result + randomWord(newWorkArray)
 
-            newWorkArray = []
-            for word in workArray:
-                newWorkArray.append(wordClass.capitalize(word))
+        newWorkArray = []
+        for word in workArray:
+            newWorkArray.append(wordClass.capitalize(word))
 
-            result = result + randomWord(newWorkArray)
-            
-        WORD_ARRAY.remove(el)
+        result = result + randomWord(newWorkArray)
 
-    leetClass.transformWord('Elisa')
+    print(result)
     print(result.__len__())
 
 # commun
 def detectType(WORD_ARRAY):
     dateClass = Date()
+    print( 'dddd')
     
     newWORD_ARRAY = []
     for word in WORD_ARRAY:
+        print(word)
         if isinstance(word, str):
             print ('string')
-        elif isinstance(word, datetime.date):
+        elif type(word) is datetime:
+            print("date")
             word = dateClass.cleanDate(word)
+        elif isinstance(word, int):
+            print("int")
+            word=str(word)
         newWORD_ARRAY.append(word)
         
         
@@ -89,6 +110,5 @@ def convertTuple(tup):
         str = str + item
 
     return str
-
 
 main()
