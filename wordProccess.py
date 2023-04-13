@@ -13,7 +13,6 @@ class WordProcessor:
         self.initiale_word_array = ['Elisa', 'Jason','mystere', '2023-04-06']
         self.case_word_array = []
         self.passwords = []
-        self.work_array = []
         self.options = {
             "leet": True,
             "capitalize": True,
@@ -22,13 +21,11 @@ class WordProcessor:
             "transformDate": True
         }
 
-    # def process(self, array):
-    def process(self):
-        # self.initiale_word_array = array.copy()
+    def process(self, array):
+        self.initiale_word_array = array.copy()
         word_array_copy = self.initiale_word_array.copy()
 
         print(word_array_copy)
-        
 
         for word in self.initiale_word_array:
             if self.options["transformDate"]:
@@ -41,7 +38,7 @@ class WordProcessor:
                     for el in month:
                         word_array_copy.append(str(el))
                 except ValueError:
-                    print('La chaîne n\'est pas une date valide.')
+                    False
 
 
         for word in word_array_copy:
@@ -53,37 +50,32 @@ class WordProcessor:
                 self.case_word_array.append(self.wordClass.uppercase(word))
 
 
-        tempo = self.deleteDuplicate(self.case_word_array)
-        tempo.extend(self.initiale_word_array)
+        temporary_word_array = self.deleteDuplicate(self.case_word_array)
+        temporary_word_array.extend(self.initiale_word_array)
 
         leet_array = []
-        for word in tempo:
+        for word in temporary_word_array:
             if self.options["leet"]:
                 print(word)
                 leet = self.leetClass.leetWord(word)
                 print(leet)
                 for counter, el in enumerate(leet):
                     leet_array.append(el)
-        tempo.extend(leet_array)
 
-        tempo = self.deleteDuplicate(tempo)
-        print(tempo)
+        temporary_word_array.extend(leet_array)
 
-
-        combinations_list = []
+        clean_word_array = self.deleteDuplicate(temporary_word_array)
+        print(clean_word_array)
 
         for i in range(1, 6):
-            for combo in combinations(tempo, i):
-                combinations_list.append(self.convert_tuple(combo))
+            for combo in combinations(clean_word_array, i):
+                self.passwords.append(self.transform_to_string(combo))
 
-        self.passwords = combinations_list
-
-        # print(self.passwords)
         return self.passwords
 
-    def convert_tuple(self, tup):
+    def transform_to_string(self, combo):
         str = ''
-        for item in tup:
+        for item in combo:
             str = str + item
 
         return str

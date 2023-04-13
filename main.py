@@ -1,3 +1,4 @@
 from wordProccess import WordProcessor
 
-print(WordProcessor().process().__len__())
+word_array = ['Chien', '2023-04-06']
+print(WordProcessor().process(word_array).__len__())

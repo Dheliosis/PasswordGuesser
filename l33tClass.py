@@ -1,16 +1,18 @@
 class L33t:
-    leet = {
-        "a" : 4,
-        "e" : 3,
-        "i" : 1,
-        "o" : 0,
-        "l" : 1,
-        "s" : 5,
-        "b" : 8,
-        "t" : 7,
-        "z" : 2,
-        "g" : 6
-    }
+
+    def __init__(self):
+        self.leet = {
+            "a" : 4,
+            "e" : 3,
+            "i" : 1,
+            "o" : 0,
+            "l" : 1,
+            "s" : 5,
+            "b" : 8,
+            "t" : 7,
+            "z" : 2,
+            "g" : 6
+        }
 
     def leetWord(self, word):
         # print(word)

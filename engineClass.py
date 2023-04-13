@@ -12,13 +12,13 @@ def hello_world():
 
 @app.route('/data', methods=['POST'])
 def data():
-    wordArray = [] 
+    word_array = [] 
     for counter, data in enumerate(request.form.getlist('text')):
-        wordArray.append(data)
+        word_array.append(data)
     for counter, data in enumerate(request.form.getlist('date')):
-        wordArray.append(data)
+        word_array.append(data)
     
-    return  WordProcessor().process()
+    return  WordProcessor().process(word_array)
 
 if __name__ == '__main__':
     app.run()
