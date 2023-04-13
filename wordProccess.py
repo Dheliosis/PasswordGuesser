@@ -1,6 +1,5 @@
 from wordClass import Word
 from dateClass import Date
-from l33tClass import L33t
 from itertools import combinations
 from datetime import datetime
 from l33tClass import L33tFullWord
@@ -10,7 +9,6 @@ class WordProcessor:
     def __init__(self, array):
         self.wordClass = Word()
         self.dateClass = Date()
-        self.leetClass = L33t()
         self.l33tFullWord = L33tFullWord()
         self.l33tOneLetter = L33tOneLetter()
         self.initiale_word_array = ['Elisa', 'Jason','mystere', '2023-04-06']
@@ -30,18 +28,10 @@ class WordProcessor:
 
         print(word_array_copy)
 
-        for word in self.initiale_word_array:
-            if self.options["transformDate"]:
-                try:
-                    datetime.strptime(word, '%Y-%m-%d')
-                    date_clean = self.dateClass.cleanDate(word)
-                    for date in date_clean:
-                        word_array_copy.append(date)
-                    month = self.dateClass.transformMonth(date_clean[1])
-                    for el in month:
-                        word_array_copy.append(str(el))
-                except ValueError:
-                    False
+        
+        if self.options["transformDate"]:
+            word_array_copy = self.transformDate(word_array_copy)
+            
 
 
         for word in word_array_copy:
@@ -56,17 +46,9 @@ class WordProcessor:
         temporary_word_array = self.deleteDuplicate(self.case_word_array)
         temporary_word_array.extend(self.initiale_word_array)
 
-        leet_array = []
-        for word in temporary_word_array:
-            if self.options["leet"]:
-                leetWordArray = self.l33tFullWord.leetWord(word)
-                
-                leetWordArray.extend(self.l33tOneLetter.leetWord(word))
+        if self.options["leet"]:
+            temporary_word_array.extend(self.transformLeet(temporary_word_array))
 
-                for counter, el in enumerate(leetWordArray):
-                    leet_array.append(el)
-
-        temporary_word_array.extend(leet_array)
 
         clean_word_array = self.deleteDuplicate(temporary_word_array)
         print(clean_word_array)
@@ -92,3 +74,34 @@ class WordProcessor:
                 temporary.append(item)
 
         return temporary
+
+    # A transformer et à mettre dans la class de date
+    # Envoyer le initiale_word_arry par les paramêtres de la fonction
+    # Et transformer les self.dateClass.function and self.function
+    def transformDate (self, exitArray):
+        for word in self.initiale_word_array:
+            try:
+                datetime.strptime(word, '%Y-%m-%d')
+                date_clean = self.dateClass.cleanDate(word)
+                for date in date_clean:
+                    exitArray.append(date)
+                month = self.dateClass.transformMonth(date_clean[1])
+                for el in month:
+                    exitArray.append(str(el))
+            except ValueError:
+                False
+
+        return exitArray
+
+    # A transformer et à mettre dans la class de leet
+    def transformLeet (self, word_array):
+        leet_array = []
+        for word in word_array:
+            leetWordArray = self.l33tFullWord.leetWord(word)
+            
+            leetWordArray.extend(self.l33tOneLetter.leetWord(word))
+
+            for counter, el in enumerate(leetWordArray):
+                leet_array.append(el)
+        
+        return leet_array
