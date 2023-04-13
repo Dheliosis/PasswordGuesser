@@ -3,16 +3,18 @@ from dateClass import Date
 from l33tClass import L33t
 from itertools import combinations
 from datetime import datetime
+from l33tClass import L33tFullWord
+from l33tClass import L33tOneLetter
 
 class WordProcessor:
-    wordClass = Word()
-    dateClass = Date()
-    leetClass = L33t()
-
-    def __init__(self):
+    def __init__(self, array):
+        self.wordClass = Word()
+        self.dateClass = Date()
+        self.leetClass = L33t()
+        self.l33tFullWord = L33tFullWord()
+        self.l33tOneLetter = L33tOneLetter()
         self.initiale_word_array = ['Elisa', 'Jason','mystere', '2023-04-06']
         self.case_word_array = []
-        self.passwords = []
         self.options = {
             "leet": True,
             "capitalize": True,
@@ -20,6 +22,7 @@ class WordProcessor:
             "uppercase": True,
             "transformDate": True
         }
+        self.passwords = self.process(array)
 
     def process(self, array):
         self.initiale_word_array = array.copy()
@@ -56,10 +59,11 @@ class WordProcessor:
         leet_array = []
         for word in temporary_word_array:
             if self.options["leet"]:
-                print(word)
-                leet = self.leetClass.leetWord(word)
-                print(leet)
-                for counter, el in enumerate(leet):
+                leetWordArray = self.l33tFullWord.leetWord(word)
+                
+                leetWordArray.extend(self.l33tOneLetter.leetWord(word))
+
+                for counter, el in enumerate(leetWordArray):
                     leet_array.append(el)
 
         temporary_word_array.extend(leet_array)
@@ -67,11 +71,12 @@ class WordProcessor:
         clean_word_array = self.deleteDuplicate(temporary_word_array)
         print(clean_word_array)
 
+        result = []
         for i in range(1, 6):
             for combo in combinations(clean_word_array, i):
-                self.passwords.append(self.transform_to_string(combo))
+                result.append(self.transform_to_string(combo))
 
-        return self.passwords
+        return result
 
     def transform_to_string(self, combo):
         str = ''

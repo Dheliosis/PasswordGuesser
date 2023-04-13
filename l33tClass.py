@@ -15,40 +15,44 @@ class L33t:
         }
 
     def leetWord(self, word):
-        # print(word)
-        leetArray = []
-        cleanWord = word.lower()
+        return
+    
 
-        leetArray = self.leetAllWord(cleanWord, leetArray)
-        
-        leetArray = self.leetOneLetter(cleanWord, leetArray)
+class L33tFullWord(L33t):
+    def __init__(self):
+        super().__init__()
 
-        # print('leetArray',leetArray) 
-        return leetArray
-
-    def leetAllWord (self, word, leetArray):
+    def leetWord(self, word):
+        leet_array = []
         fullWord = word
 
         for index, letter in  enumerate(fullWord):
+            letter = letter.lower()
+
             for leetLetter in self.leet:
                 if (leetLetter == letter):
                     fullWord = fullWord[:index] + str(self.leet[leetLetter]) + fullWord[index+1:]
-                    leetArray.append(fullWord)
+                    leet_array.append(fullWord)
                     break
         
-        return leetArray
+        return leet_array
 
-    def leetOneLetter (self, word, leetArray):
+class L33tOneLetter(L33t):
+    def __init__(self):
+        super().__init__()
+    
+    def leetWord(self, word):
+        leet_array = []
         oneLetterLeetWord = word
 
         for index, letter in enumerate(word):
+            letter = letter.lower()
+
             for leetLetter in self.leet:
-                if index == 0:
-                    break
                 if leetLetter == letter:
                     oneLetterLeetWord = oneLetterLeetWord[:index] + str(self.leet[leetLetter]) + oneLetterLeetWord[index+1:]
-                    leetArray.append(oneLetterLeetWord)
+                    leet_array.append(oneLetterLeetWord)
                     oneLetterLeetWord = word
                     break
         
-        return leetArray
+        return leet_array
