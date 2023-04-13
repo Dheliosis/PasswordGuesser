@@ -1,7 +1,8 @@
 from flask import Flask
 from flask import render_template
 from flask import request
-from main import main
+from wordProccess import WordProcessor
+
 
 app = Flask(__name__)
 
@@ -11,14 +12,13 @@ def hello_world():
 
 @app.route('/data', methods=['POST'])
 def data():
-    word = [] 
+    wordArray = [] 
     for counter, data in enumerate(request.form.getlist('text')):
-        word.append(data)
+        wordArray.append(data)
     for counter, data in enumerate(request.form.getlist('date')):
-        word.append(data)
-    # print(word)
-    main(word)
-    return 'test'
+        wordArray.append(data)
+    
+    return  WordProcessor().process()
 
 if __name__ == '__main__':
     app.run()

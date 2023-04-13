@@ -11,20 +11,42 @@ class L33t:
         "z" : 2,
         "g" : 6
     }
-    
-    def transformWord(self, word):
+
+    def leetWord(self, word):
+        # print(word)
         leetArray = []
-        word= word.lower()
-        print(word)
-        for index, letter in  enumerate(word, start=0):
-            print(letter)
+        cleanWord = word.lower()
+
+        leetArray = self.leetAllWord(cleanWord, leetArray)
+        
+        leetArray = self.leetOneLetter(cleanWord, leetArray)
+
+        # print('leetArray',leetArray) 
+        return leetArray
+
+    def leetAllWord (self, word, leetArray):
+        fullWord = word
+
+        for index, letter in  enumerate(fullWord):
             for leetLetter in self.leet:
-                print(leetLetter, letter)
                 if (leetLetter == letter):
-                    print('yes')
-                    word = word[:index] + str(self.leet[leetLetter]) + word[index+1:]
-                    print(word)
-                    leetArray.append(word)
+                    fullWord = fullWord[:index] + str(self.leet[leetLetter]) + fullWord[index+1:]
+                    leetArray.append(fullWord)
                     break
-        print(leetArray) 
+        
+        return leetArray
+
+    def leetOneLetter (self, word, leetArray):
+        oneLetterLeetWord = word
+
+        for index, letter in enumerate(word):
+            for leetLetter in self.leet:
+                if index == 0:
+                    break
+                if leetLetter == letter:
+                    oneLetterLeetWord = oneLetterLeetWord[:index] + str(self.leet[leetLetter]) + oneLetterLeetWord[index+1:]
+                    leetArray.append(oneLetterLeetWord)
+                    oneLetterLeetWord = word
+                    break
+        
         return leetArray
