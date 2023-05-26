@@ -1,7 +1,7 @@
 from flask import Flask
 from flask import render_template
 from flask import request
-from wordProccess import WordProcessor
+from wordProcess import WordProcessor
 
 
 app = Flask(__name__)
@@ -18,7 +18,7 @@ def data():
     for counter, data in enumerate(request.form.getlist('date')):
         word_array.append(data)
     
-    return  WordProcessor().process(word_array)
+    return  WordProcessor(word_array).process(word_array)
 
 if __name__ == '__main__':
     app.run()

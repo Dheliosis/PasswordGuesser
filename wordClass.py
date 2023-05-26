@@ -1,13 +1,23 @@
 # import unicode
 
 class Word:
-    def capitalize(self, word):
+    @staticmethod
+    def transform():
+        return
+
+class Capitalize(Word):
+    @staticmethod
+    def transform(word):
         return word.capitalize()
 
-    def uppercase(self, word):
+class Uppercase(Word):
+    @staticmethod
+    def transform(word):
         return word.upper()
 
-    def lowercase(self, word):
+class Lowercase(Word):
+    @staticmethod
+    def transform(word):
         return word.lower()
 
     # def removeAccents(self, word):
