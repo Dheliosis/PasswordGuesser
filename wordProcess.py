@@ -35,7 +35,7 @@ class WordProcessor:
         print(word_array_copy)
 
         if self.__options["transformDate"]:
-            word_array_copy = self.__dateClass.transformDate(self.__initiale_word_array,word_array_copy)
+            word_array_copy = self.transformDate(self.__initiale_word_array,word_array_copy)
 
         for word in word_array_copy:
             if self.__options["capitalize"]:
@@ -75,3 +75,6 @@ class WordProcessor:
                 temporary.append(item)
 
         return temporary
+
+    def transformDate (self, initiale_word_array, exitArray):
+        return self.__dateClass.transformDate(initiale_word_array, exitArray)
