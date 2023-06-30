@@ -1,9 +1,7 @@
 from datetime import datetime
 
 class Date:
-
-    def __init__(self):
-       self.__month = {
+    __month = {
                 "01": [1, 'janvier', 'janv'],
                 "02": [2, 'février', 'fevr'],
                 "03": [3, 'mars', 'mars'],
@@ -25,12 +23,13 @@ class Date:
         # print(dateArray)
         return dateArray
     
-    def __transformMonth(self, date):
-        for el in self.__month:
+    @classmethod
+    def __transformMonth(cls, date):
+        for el in cls.__month:
             if date == el:
                 # print(el)
                 # print(self.month[el])
-                return self.__month[el]
+                return cls.__month[el]
     
 
     def transformDate (self, initiale_word_array, exitArray):
