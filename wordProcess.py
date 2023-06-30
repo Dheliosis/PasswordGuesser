@@ -32,7 +32,7 @@ class WordProcessor:
         self.__initiale_word_array = array.copy()
         word_array_copy = self.__initiale_word_array.copy()
 
-        print(word_array_copy)
+        print ('You entered the words:', word_array_copy)
 
         if self.__options["transformDate"]:
             word_array_copy = self.transformDate(self.__initiale_word_array,word_array_copy)
@@ -52,7 +52,6 @@ class WordProcessor:
             temporary_word_array.extend(self.__l33t.transform(temporary_word_array))
 
         clean_word_array = self.__deleteDuplicate(temporary_word_array)
-        print(clean_word_array)
 
         result = []
         for i in range(1, 6):

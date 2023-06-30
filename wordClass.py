@@ -1,5 +1,3 @@
-# import unicode
-
 class Word:
     @staticmethod
     def transform():

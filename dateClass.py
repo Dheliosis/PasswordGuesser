@@ -17,18 +17,14 @@ class Date:
             }
     
     def __cleanDate(self, date):
-        print('[cleanDate]')
         date= str(date)
         dateArray = date.split('-')
-        # print(dateArray)
         return dateArray
     
     @classmethod
     def __transformMonth(cls, date):
         for el in cls.__month:
             if date == el:
-                # print(el)
-                # print(self.month[el])
                 return cls.__month[el]
     
 

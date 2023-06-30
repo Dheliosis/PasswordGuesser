@@ -18,7 +18,10 @@ def data():
     for counter, data in enumerate(request.form.getlist('date')):
         word_array.append(data)
     
-    return  WordProcessor(word_array).process(word_array)
+    result = WordProcessor(word_array).process(word_array)
+    print("I have found", result.__len__(), "possibilities")
+
+    return result
 
 if __name__ == '__main__':
     app.run()
