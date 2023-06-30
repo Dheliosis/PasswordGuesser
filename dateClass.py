@@ -19,6 +19,7 @@ class Date:
     def __cleanDate(self, date):
         date= str(date)
         dateArray = date.split('-')
+
         return dateArray
     
     @classmethod
