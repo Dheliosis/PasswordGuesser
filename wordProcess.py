@@ -34,11 +34,8 @@ class WordProcessor:
 
         print(word_array_copy)
 
-        
         if self.__options["transformDate"]:
-            word_array_copy = self.transformDate(self.__initiale_word_array,word_array_copy)
-            
-
+            word_array_copy = self.__dateClass.transformDate(self.__initiale_word_array,word_array_copy)
 
         for word in word_array_copy:
             if self.__options["capitalize"]:
@@ -48,13 +45,11 @@ class WordProcessor:
             if self.__options["uppercase"]:
                 self.__case_word_array.append(self.__uppercase.transform(word))
 
-
         temporary_word_array = self.__deleteDuplicate(self.__case_word_array)
         temporary_word_array.extend(self.__initiale_word_array)
 
         if self.__options["leet"]:
             temporary_word_array.extend(self.__l33t.transform(temporary_word_array))
-
 
         clean_word_array = self.__deleteDuplicate(temporary_word_array)
         print(clean_word_array)
@@ -80,10 +75,3 @@ class WordProcessor:
                 temporary.append(item)
 
         return temporary
-
-    # A transformer et à mettre dans la class de date
-    # Envoyer le initiale_word_arry par les paramêtres de la fonction
-    # Et transformer les self.dateClass.function and self.function
-    def transformDate (self, initiale_word_array, exitArray):
-        return self.__dateClass.transformDate(initiale_word_array, exitArray)
-                

@@ -19,7 +19,3 @@ class Lowercase(Word):
     @staticmethod
     def transform(word):
         return word.lower()
-
-    # def removeAccents(self, word):
-    #     return unicode.unicode(word)
-    
